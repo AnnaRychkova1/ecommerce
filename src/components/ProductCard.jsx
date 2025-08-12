@@ -8,18 +8,43 @@ import Carousel from "react-material-ui-carousel";
 import "../styles/product-card.css";
 
 const ProductCard = ({ productFromAPI }) => {
-  console.log(productFromAPI);
+  const getRandomSubset = (
+    arr,
+    min = 1,
+    max = arr.length,
+    chanceEmpty = 0.2
+  ) => {
+    if (Math.random() < chanceEmpty) return [];
+    const count = Math.floor(Math.random() * (max - min + 1)) + min;
+    const shuffled = [...arr].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  };
+
+  const getRandomQuantity = (min = 0, max = 15, chanceZero = 0.3) => {
+    if (Math.random() < chanceZero) return 0;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
+
+  const availableColors = ["red", "blue", "green", "yellow", "black", "white"];
+  const availableSizes = ["XS", "S", "M", "L", "XL", "XXL"];
+
   const product = {
     ...productFromAPI,
     name: productFromAPI.title || "Unnamed product",
     images: [
       productFromAPI.image,
-      "%PUBLIC_URL%/images/woman-6923510_1280.png",
-      "%PUBLIC_URL%/images/secondlife-1625903_1280.png",
+      `${process.env.PUBLIC_URL}/images/woman-6923510_1280.png`,
+      `${process.env.PUBLIC_URL}/images/secondlife-1625903_1280.png`,
     ],
-    color: productFromAPI.color || ["red", "blue", "green"],
-    size: productFromAPI.size || ["S", "M", "L"],
-    quantity: productFromAPI.quantity ?? 10,
+    color:
+      productFromAPI.color && productFromAPI.color.length > 0
+        ? productFromAPI.color
+        : getRandomSubset(availableColors, 1, 3, 0.15),
+    size:
+      productFromAPI.size && productFromAPI.size.length > 0
+        ? productFromAPI.size
+        : getRandomSubset(availableSizes, 1, 4, 0.25),
+    quantity: getRandomQuantity(0, 15, 0.2),
   };
 
   const dispatch = useDispatch();
