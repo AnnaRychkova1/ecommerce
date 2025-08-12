@@ -1,0 +1,78 @@
+.productList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.productLink:hover h5 {
+  text-decoration: underline;
+}
+
+.imageContainer {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.productImage {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+  display: block;
+}
+
+.cardTitleBox {
+  height: 3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+.cardTitleBox h5 {
+  margin-bottom: 0;
+}
+
+.productDescriptionBox {
+  display: flex;
+  align-items: baseline;
+}
+
+.productDescriptionBox button {
+  background-color: transparent;
+  border: none;
+}
+
+.myListInline {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 !important;
+}
+
+.myDropdownMenu {
+  min-width: 80px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 1005;
+}
+.myDropdownMenu li {
+  box-shadow: none;
+  border-radius: 0;
+  border: 1px solid rgb(243, 239, 239);
+  margin-top: 8px;
+  z-index: 1005;
+}
+
+.myDropdownItem:hover {
+  background-color: rgb(237, 235, 235);
+}
+
+.colorBox {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
