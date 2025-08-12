@@ -3,10 +3,25 @@ import toast from "react-hot-toast";
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
-import css from "./ProductCard.module.css";
 import Carousel from "react-material-ui-carousel";
 
-const ProductCard = ({ product }) => {
+import "../styles/product-card.css";
+
+const ProductCard = ({ productFromAPI }) => {
+  console.log(productFromAPI);
+  const product = {
+    ...productFromAPI,
+    name: productFromAPI.title || "Unnamed product",
+    images: [
+      productFromAPI.image,
+      "/images/woman-6923510_1280.png",
+      "/images/secondlife-1625903_1280.png",
+    ],
+    color: productFromAPI.color || ["red", "blue", "green"],
+    size: productFromAPI.size || ["S", "M", "L"],
+    quantity: productFromAPI.quantity ?? 10,
+  };
+
   const dispatch = useDispatch();
   const [autoPlay, setAutoPlay] = useState(false);
 
@@ -44,16 +59,14 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div
-      className="productItem card text-center h-100"
-      onMouseEnter={() => setAutoPlay(true)}
-      onMouseLeave={() => setAutoPlay(false)}
-    >
+    <div className="productItem card text-center h-100">
       <Link
-        className={`text-reset text-decoration-none  ${css.productLink}`}
+        className={`text-reset text-decoration-none  product-link`}
         to={"/product/" + product.id}
+        onMouseEnter={() => setAutoPlay(true)}
+        onMouseLeave={() => setAutoPlay(false)}
       >
-        <div className={css.imageContainer}>
+        <div className="image-container">
           <Carousel
             animation="slide"
             autoPlay={autoPlay}
@@ -61,26 +74,26 @@ const ProductCard = ({ product }) => {
             interval={1500}
             indicators={false}
             navButtonsAlwaysInvisible={true}
-            sx={{ pointerEvents: autoPlay ? "auto" : "none" }}
+            sx={{ pointerEvents: autoPlay ? "auto" : "none", height: "300px" }}
           >
             {product.images.map((imgSrc, idx) => (
               <img
                 key={idx}
                 src={imgSrc}
                 alt={`${product.name} ${idx + 1}`}
-                className={css.productImage}
+                className="product-image"
               />
             ))}
           </Carousel>
         </div>
         <div className="card-body">
-          <div className={css.cardTitleBox}>
+          <div className="card-title-box">
             <h5 className="card-title">{product.name}</h5>
           </div>
         </div>
       </Link>
 
-      <ul className={`list-group list-group-flush  ${css.myListInline}`}>
+      <ul className="list-group list-group-flush  product-options-list">
         <li className="list-group-item lead h-100 fw-bold m-0 border-0 w-100 shadow ">
           $ {product.price}
         </li>
@@ -94,19 +107,20 @@ const ProductCard = ({ product }) => {
                 onClick={() => setOpenSize(!openSize)}
                 aria-expanded={openSize}
               >
-                {selectedSize || "Select size"}
+                <span className="size-box">
+                  {selectedSize || "Select size"}
+                </span>
               </button>
 
               <ul
-                className={`dropdown-menu p-0 m-0 border-0 ${
-                  css.myDropdownMenu
-                } ${openSize ? "show" : ""}`}
+                className={`dropdown-menu p-0 m-0 border-0 dropdown-menu-list
+                 ${openSize ? "show" : ""}`}
               >
                 {product.size.map((size, idx) => (
                   <li key={idx}>
                     <button
                       type="button"
-                      className={`dropdown-item  ${css.myDropdownItem} `}
+                      className="dropdown-item p-1 d-flex justify-content-center align-items-center rounded-0 dropdown-menu-item"
                       onClick={() => {
                         setSelectedSize(size);
                         setOpenSize(false);
@@ -133,30 +147,30 @@ const ProductCard = ({ product }) => {
               >
                 {selectedColor ? (
                   <span
-                    className={css.colorBox}
+                    className="color-box"
                     style={{ backgroundColor: selectedColor }}
                   />
                 ) : (
                   "Select color"
                 )}
               </button>
+
               <ul
-                className={`dropdown-menu p-0 m-0 border-0 ${
-                  css.myDropdownMenu
-                } ${openColor ? " show" : ""}`}
+                className={`dropdown-menu p-0 m-0 border-0 dropdown-menu-list
+                 ${openColor ? " show" : ""}`}
               >
                 {product.color.map((color, idx) => (
                   <li key={idx}>
                     <button
                       type="button"
-                      className={`dropdown-item p-1 d-flex justify-content-center align-items-center rounded-0  ${css.myDropdownItem} `}
+                      className="dropdown-item p-1 d-flex justify-content-center align-items-center rounded-0 dropdown-menu-item"
                       onClick={() => {
                         setSelectedColor(color);
                         setOpenColor(false);
                       }}
                     >
                       <span
-                        className={css.colorBox}
+                        className="color-box"
                         style={{ backgroundColor: color }}
                       />
                     </button>
