@@ -1,16 +1,22 @@
-## Run Locally
+# Frontend Developer Test
 
-Clone the project
+This test evaluates frontend development skills based on an existing e-commerce project.
 
-```bash
-  git clone https://dredsoftlabs-admin@bitbucket.org/dredsoftlabs/ecommerce.git
-```
+**Task:**  
+Implement a responsive Product Card component for a product listing page using the provided test data.
 
-Go to the project directory
+**Requirements:**  
+- Display product image, name, and price  
+- Variant options as a dropdown or label  
+- “Add to Cart” button, or replaced with “Out of Stock” if unavailable  
+- Clean, modern UI following UI/UX best practices  
+- Responsive design for various screen sizes
 
-```bash
-  cd eCommerce
-```
+**Deliverables:**  
+- Link to a working demo
+- Brief note explaining layout approach and responsiveness considerations
+
+---
 
 Install dependencies
 
@@ -22,7 +28,7 @@ Install dependencies
   npm install react-material-ui-carousel --save --legacy-peer-deps
 ```
 
-Start the server
+Start the frontend
 
 ```bash
   npm start
