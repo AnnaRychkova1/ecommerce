@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
 import Carousel from "react-material-ui-carousel";
@@ -25,28 +25,26 @@ const ProductCard = ({ productFromAPI }) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
-  const availableColors = ["red", "blue", "green", "yellow", "black", "white"];
-  const availableSizes = ["XS", "S", "M", "L", "XL", "XXL"];
-
-  const product = {
-    ...productFromAPI,
-    name: productFromAPI.title || "Unnamed product",
-    images: [
-      productFromAPI.image,
-      `${process.env.PUBLIC_URL}/images/woman-6923510_1280.png`,
-      `${process.env.PUBLIC_URL}/images/secondlife-1625903_1280.png`,
-    ],
-    color:
-      productFromAPI.color && productFromAPI.color.length > 0
+  const product = useMemo(() => {
+    const availableColors = ["red", "blue", "green", "yellow", "black"];
+    const availableSizes = ["XS", "S", "M", "L", "XL", "XXL"];
+    return {
+      ...productFromAPI,
+      name: productFromAPI.title || "Unnamed product",
+      images: [
+        productFromAPI.image,
+        `${process.env.PUBLIC_URL}/images/woman-6923510_1280.png`,
+        `${process.env.PUBLIC_URL}/images/secondlife-1625903_1280.png`,
+      ],
+      color: productFromAPI.color?.length
         ? productFromAPI.color
         : getRandomSubset(availableColors, 1, 3, 0.15),
-    size:
-      productFromAPI.size && productFromAPI.size.length > 0
+      size: productFromAPI.size?.length
         ? productFromAPI.size
         : getRandomSubset(availableSizes, 1, 4, 0.25),
-    quantity: getRandomQuantity(0, 15, 0.2),
-  };
-
+      quantity: getRandomQuantity(0, 15, 0.2),
+    };
+  }, [productFromAPI]);
   const dispatch = useDispatch();
   const [autoPlay, setAutoPlay] = useState(false);
 
@@ -58,8 +56,9 @@ const ProductCard = ({ productFromAPI }) => {
 
   const sizeDropdownRef = useRef(null);
   const colorDropdownRef = useRef(null);
+
   useEffect(() => {
-    function handleClickOutside(event) {
+    const handleClickOutside = (event) => {
       if (
         sizeDropdownRef.current &&
         !sizeDropdownRef.current.contains(event.target)
@@ -72,11 +71,9 @@ const ProductCard = ({ productFromAPI }) => {
       ) {
         setOpenColor(false);
       }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
     };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const addProduct = (product) => {
@@ -99,7 +96,7 @@ const ProductCard = ({ productFromAPI }) => {
             interval={1500}
             indicators={false}
             navButtonsAlwaysInvisible={true}
-            sx={{ pointerEvents: autoPlay ? "auto" : "none", height: "300px" }}
+            sx={{ pointerEvents: autoPlay ? "auto" : "none" }}
           >
             {product.images.map((imgSrc, idx) => (
               <img

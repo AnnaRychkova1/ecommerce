@@ -35,11 +35,6 @@
   margin-bottom: 0;
 }
 
-.product-description-box {
-  display: flex;
-  align-items: baseline;
-}
-
 .product-options-list {
   display: flex !important;
   flex-direction: row;
@@ -53,6 +48,7 @@
   transform: translateX(-50%) !important;
   z-index: 1005;
 }
+
 .dropdown-menu-list li {
   box-shadow: none;
   border-radius: 0;
