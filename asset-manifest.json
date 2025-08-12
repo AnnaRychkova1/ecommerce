@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "https://annarychkova1.github.io/ecommerce/static/css/main.a7334733.css",
-    "main.js": "https://annarychkova1.github.io/ecommerce/static/js/main.fe572d66.js",
+    "main.js": "https://annarychkova1.github.io/ecommerce/static/js/main.3f464932.js",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "https://annarychkova1.github.io/ecommerce/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
     "static/media/main.png.jpg": "https://annarychkova1.github.io/ecommerce/static/media/main.png.6a1127946ccd5fedde98.jpg",
     "static/media/fontawesome-webfont.eot": "https://annarychkova1.github.io/ecommerce/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
@@ -10,10 +10,10 @@
     "static/media/fontawesome-webfont.woff2?v=4.7.0": "https://annarychkova1.github.io/ecommerce/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
     "index.html": "https://annarychkova1.github.io/ecommerce/index.html",
     "main.a7334733.css.map": "https://annarychkova1.github.io/ecommerce/static/css/main.a7334733.css.map",
-    "main.fe572d66.js.map": "https://annarychkova1.github.io/ecommerce/static/js/main.fe572d66.js.map"
+    "main.3f464932.js.map": "https://annarychkova1.github.io/ecommerce/static/js/main.3f464932.js.map"
   },
   "entrypoints": [
     "static/css/main.a7334733.css",
-    "static/js/main.fe572d66.js"
+    "static/js/main.3f464932.js"
   ]
 }
