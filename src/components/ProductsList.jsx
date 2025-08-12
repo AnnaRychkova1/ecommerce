@@ -7,7 +7,7 @@ import ProductCard from "./ProductCard";
 
 import "../styles/product-card.css";
 
-const Products = () => {
+const ProductList = () => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
@@ -126,4 +126,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default ProductList;

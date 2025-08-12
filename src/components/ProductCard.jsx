@@ -14,8 +14,8 @@ const ProductCard = ({ productFromAPI }) => {
     name: productFromAPI.title || "Unnamed product",
     images: [
       productFromAPI.image,
-      "/images/woman-6923510_1280.png",
-      "/images/secondlife-1625903_1280.png",
+      "%PUBLIC_URL%/images/woman-6923510_1280.png",
+      "%PUBLIC_URL%/images/secondlife-1625903_1280.png",
     ],
     color: productFromAPI.color || ["red", "blue", "green"],
     size: productFromAPI.size || ["S", "M", "L"],
